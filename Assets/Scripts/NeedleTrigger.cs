@@ -43,6 +43,18 @@ public class NeedleTrigger : MonoBehaviour
                     if (heatControllerl.Fixed == gameObject.transform.parent.gameObject)
                     {
                         GameObject.FindGameObjectWithTag("Controller").GetComponent<EducationControll>().NeedleIn = false;
+                        foreach (GameObject obj in GameObject.FindGameObjectsWithTag("Ampul1"))
+                        {
+                            obj.GetComponents<HeaterGrabAction>()[0].Heater = null;
+                        }
+                        foreach (GameObject obj in GameObject.FindGameObjectsWithTag("Ampul2"))
+                        {
+                            obj.GetComponents<HeaterGrabAction>()[0].Heater = null;
+                        }
+                        foreach (GameObject obj in GameObject.FindGameObjectsWithTag("Ampul3"))
+                        {
+                            obj.GetComponents<HeaterGrabAction>()[0].Heater = null;
+                        }
                     }
                 }
             }

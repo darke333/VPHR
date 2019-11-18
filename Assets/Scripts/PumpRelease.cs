@@ -52,7 +52,7 @@ public class PumpRelease : MonoBehaviour
         {
             obj.SetActive(true);
         }
-        foreach(GameObject obj in GameObject.FindGameObjectsWithTag("Ampul1"))
+        /*foreach(GameObject obj in GameObject.FindGameObjectsWithTag("Ampul1"))
         {
             obj.GetComponent<AmpulRelease>().ActivateInteract();
         }
@@ -63,7 +63,7 @@ public class PumpRelease : MonoBehaviour
         foreach (GameObject obj in GameObject.FindGameObjectsWithTag("Ampul3"))
         {
             obj.GetComponent<AmpulRelease>().ActivateInteract();
-        }
+        }*/
         GameObject.FindGameObjectWithTag("Controller").GetComponent<EducationControll>().PumpOut = true;
         Destroy(this);
 

@@ -19,19 +19,34 @@ public class HeaterGrabAction : MonoBehaviour
 
     private void Controller_InteractableObjectGrabbed(object sender, InteractableObjectEventArgs e)
     {
-        Heater.GetComponent<Heater_V2>().Grabb(gameObject.tag);
+        if (Heater)
+        {
+            Heater.GetComponent<Heater_V2>().Grabb(gameObject.tag);
+
+        }
 
     }
 
     private void Controller_InteractableObjectUngrabbed(object sender, InteractableObjectEventArgs e)
     {
-        Heater.GetComponent<Heater_V2>().UnGrabb(gameObject);
+        if (Heater)
+        {
+            Heater.GetComponent<Heater_V2>().UnGrabb(gameObject);
+
+        }
 
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if (Controller.IsGrabbed())
+        {
+            if (Heater)
+            {
+                Heater.GetComponent<Heater_V2>().Grabb(gameObject.tag);
+
+            }
+        }
     }
 }

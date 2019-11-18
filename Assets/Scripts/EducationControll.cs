@@ -287,6 +287,22 @@ public class EducationControll : MonoBehaviour
 
     void PrepeareAmpul()
     {
+        /*foreach (GameObject obj in GameObject.FindGameObjectsWithTag("Ampul1"))
+        {
+            obj.GetComponents<HeaterGrabAction>()[1].enabled = false;
+        }
+        foreach (GameObject obj in GameObject.FindGameObjectsWithTag("Ampul2"))
+        {
+            obj.GetComponents<HeaterGrabAction>()[1].enabled = false;
+        }
+        foreach (GameObject obj in GameObject.FindGameObjectsWithTag("Ampul3"))
+        {
+            obj.GetComponents<HeaterGrabAction>()[1].enabled = false;
+        }*/
+        foreach (GameObject obj in GameObject.FindGameObjectsWithTag("EndAmpulTrigger"))
+        {
+            obj.GetComponent<Heater_V2>().enabled = false;
+        }
         string s = "";
         if (index == 1 || index == 4 || index == 7)
         {
@@ -306,7 +322,7 @@ public class EducationControll : MonoBehaviour
     
     void PumpInsert()
     {
-        TMPMiddle.text = "Вставьте в ампулу в насос";
+        TMPMiddle.text = "Вставьте ампулу в насос";
     }
 
     void EndFunc()

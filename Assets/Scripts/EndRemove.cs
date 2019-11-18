@@ -52,6 +52,20 @@ public class EndRemove : MonoBehaviour
                                 if (col == coli)
                                 {
                                     GameObject.FindGameObjectWithTag("Controller").GetComponent<EducationControll>().AmpulPrepeared = true;
+                                    GameObject.FindGameObjectWithTag("Controller").GetComponent<EducationControll>().AmpulPrepeared = true;
+                                    foreach (GameObject obj in GameObject.FindGameObjectsWithTag("Ampul1"))
+                                    {
+                                        obj.GetComponent<AmpulRelease>().ActivateInteract();
+                                    }
+                                    foreach (GameObject obj in GameObject.FindGameObjectsWithTag("Ampul2"))
+                                    {
+                                        obj.GetComponent<AmpulRelease>().ActivateInteract();
+                                    }
+                                    foreach (GameObject obj in GameObject.FindGameObjectsWithTag("Ampul3"))
+                                    {
+                                        obj.GetComponent<AmpulRelease>().ActivateInteract();
+                                    }
+
                                 }
                             }
                         }
@@ -63,6 +77,20 @@ public class EndRemove : MonoBehaviour
                                 if (col == coli)
                                 {
                                     GameObject.FindGameObjectWithTag("Controller").GetComponent<EducationControll>().AmpulPrepeared = true;
+                                    GameObject.FindGameObjectWithTag("Controller").GetComponent<EducationControll>().AmpulPrepeared = true;
+                                    foreach (GameObject obj in GameObject.FindGameObjectsWithTag("Ampul1"))
+                                    {
+                                        obj.GetComponent<AmpulRelease>().ActivateInteract();
+                                    }
+                                    foreach (GameObject obj in GameObject.FindGameObjectsWithTag("Ampul2"))
+                                    {
+                                        obj.GetComponent<AmpulRelease>().ActivateInteract();
+                                    }
+                                    foreach (GameObject obj in GameObject.FindGameObjectsWithTag("Ampul3"))
+                                    {
+                                        obj.GetComponent<AmpulRelease>().ActivateInteract();
+                                    }
+
                                 }
                             }
                         }
