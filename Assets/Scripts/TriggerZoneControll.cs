@@ -57,27 +57,11 @@ public class TriggerZoneControll : MonoBehaviour
                 {
                     HAmpulPack.SetActive(true);
                     PAmpulPack.SetActive(true);
-                    /*HAmpulPack.transform.parent.gameObject.AddComponent<Rigidbody>();
-                    HAmpulPack.transform.position = PAmpulPack.transform.parent.Find("AmpulPart").position;
-                    HAmpulPack.transform.rotation = PAmpulPack.transform.parent.Find("AmpulPart").rotation;
-                    HAmpulPack.transform.parent.gameObject.AddComponent<FixedJoint>();
-                    
-                    foreach (FixedJoint jointt in HAmpulPack.transform.parent.gameObject.GetComponents<FixedJoint>())
-                    {
-                        if (jointt.breakForce != 100)
-                        {
-                            jointt.connectedBody = PAmpulPack.transform.parent.gameObject.GetComponent<Rigidbody>();
-                            jointt.breakForce = 100;
-
-                        }
-                    }*/
-                    
                     HAmpulPack.transform.parent.gameObject.GetComponent<AmpulActivate>().enabled = true;
-                    GameObject.FindGameObjectWithTag("Controller").GetComponent<EducationControll>().AmpulFreeText(i);
+                    GameObject.FindGameObjectWithTag("Controller").GetComponent<EducationControll>().AmpulPackReleased(i);
                     ++i;
                     if (i < 3)
-                    {
-                        
+                    {                        
                         PAmpulPack = PAmpulPacks[i];
                         controller = PAmpulPack.transform.parent.gameObject.GetComponent<VRTK_InteractableObject>();
                         HAmpulPack = HAmpulPacks[i];

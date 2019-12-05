@@ -8,6 +8,7 @@ public class HeaterGrabAction : MonoBehaviour
 
     VRTK_InteractableObject Controller;
     public GameObject Heater;
+    public GameObject SecondHeater;
 
     // Start is called before the first frame update
     void Start()
@@ -22,7 +23,10 @@ public class HeaterGrabAction : MonoBehaviour
         if (Heater)
         {
             Heater.GetComponent<Heater_V2>().Grabb(gameObject.tag);
-
+        }
+        if (SecondHeater)
+        {
+            SecondHeater.GetComponent<Heater_V2>().Grabb(gameObject.tag);
         }
 
     }
@@ -33,6 +37,10 @@ public class HeaterGrabAction : MonoBehaviour
         {
             Heater.GetComponent<Heater_V2>().UnGrabb(gameObject);
 
+        }
+        if (SecondHeater)
+        {
+            SecondHeater.GetComponent<Heater_V2>().UnGrabb(gameObject);
         }
 
     }
@@ -46,6 +54,10 @@ public class HeaterGrabAction : MonoBehaviour
             {
                 Heater.GetComponent<Heater_V2>().Grabb(gameObject.tag);
 
+            }
+            if (SecondHeater)
+            {
+                SecondHeater.GetComponent<Heater_V2>().Grabb(gameObject.tag);
             }
         }
     }

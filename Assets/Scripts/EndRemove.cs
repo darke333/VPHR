@@ -42,6 +42,7 @@ public class EndRemove : MonoBehaviour
                     other.transform.parent.GetComponent<AmpulAtributs>().EndRemoved++;
                     newobj.AddComponent<Rigidbody>();
                     Colis.Add(other);
+                    GameObject.FindGameObjectWithTag("Controller").GetComponent<EducationControll>().EndPushedTracker();
                     if (other.transform.parent.tag == "Ampul2")
                     {
                         if (other.name == "Wrong")
@@ -52,7 +53,7 @@ public class EndRemove : MonoBehaviour
                                 if (col == coli)
                                 {
                                     GameObject.FindGameObjectWithTag("Controller").GetComponent<EducationControll>().AmpulPrepeared = true;
-                                    GameObject.FindGameObjectWithTag("Controller").GetComponent<EducationControll>().AmpulPrepeared = true;
+                                    //GameObject.FindGameObjectWithTag("Controller").GetComponent<EducationControll>().AmpulPrepeared = true;
                                     foreach (GameObject obj in GameObject.FindGameObjectsWithTag("Ampul1"))
                                     {
                                         obj.GetComponent<AmpulRelease>().ActivateInteract();
@@ -77,7 +78,7 @@ public class EndRemove : MonoBehaviour
                                 if (col == coli)
                                 {
                                     GameObject.FindGameObjectWithTag("Controller").GetComponent<EducationControll>().AmpulPrepeared = true;
-                                    GameObject.FindGameObjectWithTag("Controller").GetComponent<EducationControll>().AmpulPrepeared = true;
+                                    //GameObject.FindGameObjectWithTag("Controller").GetComponent<EducationControll>().AmpulPrepeared = true;
                                     foreach (GameObject obj in GameObject.FindGameObjectsWithTag("Ampul1"))
                                     {
                                         obj.GetComponent<AmpulRelease>().ActivateInteract();
@@ -95,11 +96,8 @@ public class EndRemove : MonoBehaviour
                             }
                         }
                     }
-                }
-                
-                //other.isTrigger = true;
+                }                
             }
         }
-        print("Released");
     }
 }

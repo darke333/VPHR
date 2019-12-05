@@ -32,6 +32,17 @@ public class PumpWork : MonoBehaviour
         {
             educ.END = true;
             Ampul.SetMaterial();
+            if(Ampul.tag == "Ampul3")
+            {
+                foreach (GameObject ampul in GameObject.FindGameObjectsWithTag("Ampul3"))
+                {
+                    AmpulAtributs atributs = ampul.GetComponent<AmpulAtributs>();
+                    if (atributs.EndRemoved == 2 && !atributs.EndPinned)
+                    {
+                        atributs.SetMaterial(0);
+                    }
+                }
+            }
         }
     }
 

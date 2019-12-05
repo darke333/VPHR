@@ -19,7 +19,7 @@ public class AmpulAtributs : MonoBehaviour
     {
         Using = false;
         mesh = transform.Find("Indicator").GetComponent<MeshRenderer>();
-        transform.Find("Indicator").GetComponent<MeshRenderer>().material = NormalDanger;
+        //transform.Find("Indicator").GetComponent<MeshRenderer>().material = NormalDanger;
         EndRemoved = 0;
         if (gameObject.tag == "Ampul2")
         {
@@ -31,9 +31,13 @@ public class AmpulAtributs : MonoBehaviour
         }
     }
 
-    public void SetMaterial()
+    public void SetMaterial(int i = -1)
     {
-        switch (GameObject.FindGameObjectWithTag("Controller").GetComponent<EducationControll>().DangerLevel)
+        if(i == -1)
+        {
+            i = GameObject.FindGameObjectWithTag("Controller").GetComponent<EducationControll>().DangerLevel;
+        }
+        switch (i)
         {
             case 1:
                 transform.Find("Indicator").GetComponent<MeshRenderer>().material = LowDColor;
@@ -60,7 +64,7 @@ public class AmpulAtributs : MonoBehaviour
                 transform.Find("Indicator").GetComponent<MeshRenderer>().material = NormalDanger;
                 if (gameObject.tag == "Ampul3")
                 {
-                    transform.Find("Indicator").GetComponent<MeshRenderer>().material = LowDColor;
+                    transform.Find("Indicator").GetComponent<MeshRenderer>().material = NormalDanger;
                 }
                 break;
         }

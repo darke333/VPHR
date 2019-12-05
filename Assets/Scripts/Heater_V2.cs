@@ -73,11 +73,8 @@ public class Heater_V2 : MonoBehaviour
     public void UnGrabb(GameObject FixedPart)
     {
         
-        print("Ungrabbed");
         if (IsStaying && !IsFulled)
         {
-            print("UngrabbedOnPos");
-
             FixedPart.AddComponent<FixedJoint>();
             foreach (FixedJoint jointt in FixedPart.GetComponents<FixedJoint>())
             {
@@ -98,7 +95,7 @@ public class Heater_V2 : MonoBehaviour
             }
             if (gameObject.tag == "AmpulTriggerZone")
             {
-                GameObject.FindGameObjectWithTag("Controller").GetComponent<EducationControll>().HeatedIn = true;
+                GameObject.FindGameObjectWithTag("Controller").GetComponent<EducationControll>().CountHeatedAmpuls(1);
             }
             if (gameObject.tag == "EndAmpulTrigger")
             {
@@ -128,7 +125,7 @@ public class Heater_V2 : MonoBehaviour
                 }
                 if (gameObject.tag == "AmpulTriggerZone")
                 {
-                    GameObject.FindGameObjectWithTag("Controller").GetComponent<EducationControll>().HeatedIn = false;
+                    GameObject.FindGameObjectWithTag("Controller").GetComponent<EducationControll>().CountHeatedAmpuls(-1); 
                 }
                 if (gameObject.tag == "EndAmpulTrigger")
                 {

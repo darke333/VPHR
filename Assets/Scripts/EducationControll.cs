@@ -27,11 +27,14 @@ public class EducationControll : MonoBehaviour
     public int countTimes;
     public bool END;
     public int DangerLevel;
+    public int ReleasedAmpuls;
+    public int HeatedInCount; // смотрит, сколько ампул вставили в нагревательную трубку. Сделано для подсчета красныз ампул
     //bool[] Choise;
 
     // Start is called before the first frame update
     void Start()
     {
+        ReleasedAmpuls = 0; 
         END = false;
         Pumper.enabled = false;
         AmpulInserted = false;
@@ -66,6 +69,47 @@ public class EducationControll : MonoBehaviour
         ActivateTriggers();
     }
 
+    public void CountHeatedAmpuls(int change)
+    {
+        HeatedInCount += change;
+
+        if (index == 1 || index == 4 || index == 7)
+        {
+            if(HeatedInCount == 2)
+            {
+                HeatedIn = true;
+
+            }
+            else
+            {
+                HeatedIn = false;
+            }
+        }
+        if (index == 2 || index == 5 || index == 8)
+        {
+            if (HeatedInCount == 1)
+            {
+                HeatedIn = true;
+
+            }
+            else
+            {
+                HeatedIn = false;
+            }
+        }
+        if (index == 3 || index == 6 || index == 9)
+        {
+            if (HeatedInCount == 1)
+            {
+                HeatedIn = true;
+
+            }
+            else
+            {
+                HeatedIn = false;
+            }
+        }
+    }
 
     void ActivateTriggers()
     {
@@ -81,6 +125,7 @@ public class EducationControll : MonoBehaviour
         {
             Heated[0].SetActive(false);
             Heated[2].SetActive(false);
+            Heated[4].SetActive(false);
             PumpTriggers[0].SetActive(false);
             PumpTriggers[2].SetActive(false);
         }
@@ -88,6 +133,7 @@ public class EducationControll : MonoBehaviour
         {
             Heated[0].SetActive(false);
             Heated[1].SetActive(false);
+            Heated[4].SetActive(false);
             PumpTriggers[0].SetActive(false);
             PumpTriggers[1].SetActive(false);
         }
@@ -96,6 +142,7 @@ public class EducationControll : MonoBehaviour
     public void ChoseGaz()
     {
         index = Random.Range(1, 9);
+        //index = 1;
         DangerLevel = Random.Range(1, 100) % 4;
     }
 
@@ -157,110 +204,176 @@ public class EducationControll : MonoBehaviour
         TMPMiddle.text = "Извлеките пакет с нужными ампулами " + s;
     }
 
-    public void AmpulFreeText(int i)
+    public void AmpulPackReleased(int i)
     {
-        print(i);
         if (index == 1 || index == 4 || index == 7)
         {
             if (i == 0)
             {
-                if (temperature < 0)
-                {
-                    Heat = true;
-                    foreach (GameObject obj in GameObject.FindGameObjectsWithTag("Ampul3"))
-                    {
-                        obj.GetComponent<AmpulAtributs>().Heated = false;
-                        print("klack");
-
-                    }
-                }
-                else
-                {
-                    foreach (GameObject obj in GameObject.FindGameObjectsWithTag("Ampul3"))
-                    {
-                        obj.GetComponent<AmpulAtributs>().Heated = true;
-
-                    }
-                    Heated[1].SetActive(false);
-                    Heated[2].SetActive(false);
-                    Heated[0].SetActive(false);
-                    FullHeated = true;
-                    if (!PumpOut)
-                    {
-                        ReleasePump();
-                    }
-                }
+                TMPMiddle.text = "Извлеките две ампулы";
             }
-            
-
         }
         if (index == 2 || index == 5 || index == 8)
         {
-            if(i == 2)
+            if (i == 2)
             {
-                if (temperature < -10)
-                {
-                    Heat = true;
-                    foreach (GameObject obj in GameObject.FindGameObjectsWithTag("Ampul1"))
-                    {
-                        obj.GetComponent<AmpulAtributs>().Heated = false;
-                        print("klack");
-
-                    }
-                }
-                else
-                {
-                    foreach (GameObject obj in GameObject.FindGameObjectsWithTag("Ampul1"))
-                    {
-                        obj.GetComponent<AmpulAtributs>().Heated = true;
-                        print(obj.GetComponent<AmpulAtributs>().Heated);
-                    }
-                    Heated[1].SetActive(false);
-                    Heated[2].SetActive(false);
-                    Heated[0].SetActive(false);
-                    FullHeated = true;
-
-                    if (!PumpOut)
-                    {
-                        ReleasePump();
-                    }
-                }
+                TMPMiddle.text = "Извлеките ампулу";
             }
-           
-            
         }
         if (index == 3 || index == 6 || index == 9)
         {
             if (i == 1)
             {
-                if (temperature < 10)
-                {
-                    Heat = true;
-                    foreach (GameObject obj in GameObject.FindGameObjectsWithTag("Ampul2"))
-                    {
-                        obj.GetComponent<AmpulAtributs>().Heated = false;
-                        print("klack");
+                TMPMiddle.text = "Извлеките ампулу";
+            }
+        }
+    }
 
-                    }
+    public void AmpulReleaseCount(int colorNumber)
+    {        
+        if ((index == 1 || index == 4 || index == 7) && colorNumber ==3 )
+        {
+            ReleasedAmpuls++;
+            if (ReleasedAmpuls == 2)
+            {
+                AmpulFreeText();
+            }
+        }
+        if ((index == 2 || index == 5 || index == 8) && colorNumber == 1)
+        {
+            ReleasedAmpuls++;
+            if (ReleasedAmpuls == 1)
+            {
+                AmpulFreeText();
+            }
+        }
+        if ((index == 3 || index == 6 || index == 9) && colorNumber == 2)
+        {
+            ReleasedAmpuls++;
+            if (ReleasedAmpuls == 1)
+            {
+                AmpulFreeText();
+            }
+        }
+    }
+
+    public void EndPushedTracker()
+    {
+        if ((index == 1 || index == 4 || index == 7))
+        {
+            int i = 0;
+            bool EndPushed = false;
+            foreach(GameObject ampul in GameObject.FindGameObjectsWithTag("Ampul3"))
+            {
+                AmpulAtributs atributs = ampul.GetComponent<AmpulAtributs>();
+                if (atributs.EndRemoved == 2)
+                {
+                    i++;
+                }
+                if (atributs.EndPinned)
+                {
+                    EndPushed = true;
+                }
+            }
+            if (i == 2 && EndPushed)
+            {
+                AmpulPrepeared = true;
+            }
+        }
+        if ((index == 2 || index == 5 || index == 8))
+        {
+            AmpulPrepeared = true;
+        }
+        if ((index == 3 || index == 6 || index == 9))
+        {
+            AmpulPrepeared = true;
+        }
+    }
+
+    
+
+    public void AmpulFreeText()
+    {
+        if (index == 1 || index == 4 || index == 7)
+        {
+            if (temperature < 0)
+            {
+                Heat = true;
+                foreach (GameObject obj in GameObject.FindGameObjectsWithTag("Ampul3"))
+                {
+                    obj.GetComponent<AmpulAtributs>().Heated = false;
+                }
+            }
+            else
+            {
+                foreach (GameObject obj in GameObject.FindGameObjectsWithTag("Ampul3"))
+                {
+                    obj.GetComponent<AmpulAtributs>().Heated = true;
 
                 }
-                else
+                Heated[1].SetActive(false);
+                Heated[2].SetActive(false);
+                Heated[0].SetActive(false);
+                FullHeated = true;
+                if (!PumpOut)
                 {
-                    foreach (GameObject obj in GameObject.FindGameObjectsWithTag("Ampul2"))
-                    {
-                        obj.GetComponent<AmpulAtributs>().Heated = true;
+                    ReleasePump();
+                }
+            }
 
-                        print(obj.GetComponent<AmpulAtributs>().Heated);
-                    }
-                    Heated[1].SetActive(false);
-                    Heated[2].SetActive(false);
-                    Heated[0].SetActive(false);
-                    FullHeated = true;
+        }
+        if (index == 2 || index == 5 || index == 8)
+        {
+            if (temperature < -10)
+            {
+                Heat = true;
+                foreach (GameObject obj in GameObject.FindGameObjectsWithTag("Ampul1"))
+                {
+                    obj.GetComponent<AmpulAtributs>().Heated = false;
+                }
+            }
+            else
+            {
+                foreach (GameObject obj in GameObject.FindGameObjectsWithTag("Ampul1"))
+                {
+                    obj.GetComponent<AmpulAtributs>().Heated = true;
+                }
+                Heated[1].SetActive(false);
+                Heated[2].SetActive(false);
+                Heated[0].SetActive(false);
+                FullHeated = true;
 
-                    if (!PumpOut)
-                    {
-                        ReleasePump();
-                    }
+                if (!PumpOut)
+                {
+                    ReleasePump();
+                }
+            }
+        }
+        if (index == 3 || index == 6 || index == 9)
+        {
+            if (temperature < 10)
+            {
+                Heat = true;
+                foreach (GameObject obj in GameObject.FindGameObjectsWithTag("Ampul2"))
+                {
+                    obj.GetComponent<AmpulAtributs>().Heated = false;
+                }
+
+            }
+            else
+            {
+                foreach (GameObject obj in GameObject.FindGameObjectsWithTag("Ampul2"))
+                {
+                    obj.GetComponent<AmpulAtributs>().Heated = true;
+                }
+                Heated[1].SetActive(false);
+                Heated[2].SetActive(false);
+                Heated[0].SetActive(false);
+                FullHeated = true;
+
+                if (!PumpOut)
+                {
+                    ReleasePump();
                 }
             }
 
@@ -287,18 +400,6 @@ public class EducationControll : MonoBehaviour
 
     void PrepeareAmpul()
     {
-        /*foreach (GameObject obj in GameObject.FindGameObjectsWithTag("Ampul1"))
-        {
-            obj.GetComponents<HeaterGrabAction>()[1].enabled = false;
-        }
-        foreach (GameObject obj in GameObject.FindGameObjectsWithTag("Ampul2"))
-        {
-            obj.GetComponents<HeaterGrabAction>()[1].enabled = false;
-        }
-        foreach (GameObject obj in GameObject.FindGameObjectsWithTag("Ampul3"))
-        {
-            obj.GetComponents<HeaterGrabAction>()[1].enabled = false;
-        }*/
         foreach (GameObject obj in GameObject.FindGameObjectsWithTag("EndAmpulTrigger"))
         {
             obj.GetComponent<Heater_V2>().enabled = false;
@@ -306,8 +407,8 @@ public class EducationControll : MonoBehaviour
         string s = "";
         if (index == 1 || index == 4 || index == 7)
         {
-            s = " и проткните противоположную от индикатора сторону ампулы (маркированные цветом ампулы отверстия с белой стороны насоса)" ;
-            TMPMiddle.text = "Отделите концы апул (маленькие круглые отверстия с черного конца насоса)" + "\n"  + s;
+            s = " и проткните ближнюю к индикатору сторону одной (опытной) ампулы (маркированные цветом ампулы отверстия с белой стороны насоса)" ;
+            TMPMiddle.text = "Отделите концы обоих апул (маленькие круглые отверстия с черного конца насоса)" + "\n"  + s;
         }
         if (index == 2 || index == 5 || index == 8)
         {
@@ -349,7 +450,6 @@ public class EducationControll : MonoBehaviour
                 case 3:
                     s = "В воздухе обнаружены опасные концентраций зарина, зомана или V-газов  (обратите внимание на цвет наполнителя, он стал красного цвета)";
                     s += "\n" + "Будем считать, что тестовая (вскрытая ампула без прокачки) окрасилась в желтый";
-
                     break;
             }
         }

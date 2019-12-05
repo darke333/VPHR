@@ -45,6 +45,21 @@ public class AmpulRelease : MonoBehaviour
         {
             AmpulPack.GetComponent<AmpulActivate>().DeletFromList(gameObject);
         }
+        if(gameObject != AmpulPack)
+        {
+            if(gameObject.tag == "Ampul3")
+            {
+                GameObject.FindGameObjectWithTag("Controller").GetComponent<EducationControll>().AmpulReleaseCount(3);
+            }
+            if (gameObject.tag == "Ampul2")
+            {
+                GameObject.FindGameObjectWithTag("Controller").GetComponent<EducationControll>().AmpulReleaseCount(2);
+            }
+            if (gameObject.tag == "Ampul1")
+            {
+                GameObject.FindGameObjectWithTag("Controller").GetComponent<EducationControll>().AmpulReleaseCount(1);
+            }
+        }
         started = true;
     }
 

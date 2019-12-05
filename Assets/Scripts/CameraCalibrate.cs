@@ -23,6 +23,9 @@ public class CameraCalibrate : MonoBehaviour
     {
         dif = gameObject.transform.position - CameraPos.position;
         HeadPos.position += dif;
+        //float AngleDif = gameObject.transform.eulerAngles.y - CameraPos.eulerAngles.y;
+        
+        //HeadPos.eulerAngles += new Vector3(0,AngleDif,0);
     }
 
     // Update is called once per frame
@@ -34,7 +37,7 @@ public class CameraCalibrate : MonoBehaviour
             RestartPos();
             time = -100000000;
         }
-        if (Input.GetKeyDown(KeyCode.K))
+        if (Input.GetKeyDown("k"))
         {
             RestartPos();
         }

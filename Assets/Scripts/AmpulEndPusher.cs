@@ -38,7 +38,7 @@ public class AmpulEndPusher : MonoBehaviour
                 if (t)
                 {
                     other.transform.parent.GetComponent<AmpulAtributs>().EndPinned = true;
-                    GameObject.FindGameObjectWithTag("Controller").GetComponent<EducationControll>().AmpulPrepeared = true;
+                    GameObject.FindGameObjectWithTag("Controller").GetComponent<EducationControll>().EndPushedTracker();
                     foreach (GameObject obj in GameObject.FindGameObjectsWithTag("Ampul1"))
                     {
                         obj.GetComponent<AmpulRelease>().ActivateInteract();
