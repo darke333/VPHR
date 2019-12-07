@@ -22,7 +22,7 @@ public class HeaterGrabAction : MonoBehaviour
     {
         if (Heater)
         {
-            if (GameObject.FindGameObjectWithTag("Controller").GetComponent<EducationControll>().AmpulPrepeared || Heater.tag == "AmpulTriggerZone")
+            if (GameObject.FindGameObjectWithTag("Controller").GetComponent<EducationControll>().AmpulPrepeared || Heater.tag == "AmpulTriggerZone" || gameObject.name == "HeaterTriggerZone")
             {
                 Heater.GetComponent<Heater_V2>().Grabb(gameObject.tag);
             }
@@ -55,7 +55,7 @@ public class HeaterGrabAction : MonoBehaviour
         {
             if (Heater)
             {
-                if (GameObject.FindGameObjectWithTag("Controller").GetComponent<EducationControll>().AmpulPrepeared || Heater.tag == "AmpulTriggerZone")
+                if (GameObject.FindGameObjectWithTag("Controller").GetComponent<EducationControll>().AmpulPrepeared || Heater.tag == "AmpulTriggerZone" || Heater.name == "HeaterTriggerZone")
                 {
                     Heater.GetComponent<Heater_V2>().Grabb(gameObject.tag);
                 }

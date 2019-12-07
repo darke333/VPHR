@@ -180,8 +180,6 @@ public class EducationControll : MonoBehaviour
             l = "> 10";
         }
         temperature = Random.Range(-20, +10);
-        ///////////////////////fdsf
-        temperature = 20;
         string s = temperature.ToString();
         TMPRight.text = "Температура: " + s + "\n" + "Необходимая температура: " + l;
         time = -1000000;
