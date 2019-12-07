@@ -9,8 +9,6 @@ public class Heater_V2 : MonoBehaviour
     public GameObject Heat;
     public bool IsStaying;
     public bool IsFulled;
-    Collider col;
-    MeshRenderer mesh;
     public string HeatTag;
 
 
@@ -48,8 +46,6 @@ public class Heater_V2 : MonoBehaviour
     void Start()
     {
         IsFulled = false;
-        col = gameObject.GetComponent<Collider>();
-        mesh = gameObject.GetComponent<MeshRenderer>();
         gameObject.GetComponent<Collider>().enabled = false;
         gameObject.GetComponent<MeshRenderer>().enabled = false;
         IsStaying = false;

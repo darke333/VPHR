@@ -125,7 +125,7 @@ public class EducationControll : MonoBehaviour
         {
             Heated[0].SetActive(false);
             Heated[2].SetActive(false);
-            Heated[4].SetActive(false);
+            Heated[3].SetActive(false);
             PumpTriggers[0].SetActive(false);
             PumpTriggers[2].SetActive(false);
         }
@@ -133,7 +133,7 @@ public class EducationControll : MonoBehaviour
         {
             Heated[0].SetActive(false);
             Heated[1].SetActive(false);
-            Heated[4].SetActive(false);
+            Heated[3].SetActive(false);
             PumpTriggers[0].SetActive(false);
             PumpTriggers[1].SetActive(false);
         }
@@ -180,7 +180,8 @@ public class EducationControll : MonoBehaviour
             l = "> 10";
         }
         temperature = Random.Range(-20, +10);
-
+        ///////////////////////fdsf
+        temperature = 20;
         string s = temperature.ToString();
         TMPRight.text = "Температура: " + s + "\n" + "Необходимая температура: " + l;
         time = -1000000;
@@ -266,7 +267,7 @@ public class EducationControll : MonoBehaviour
             foreach(GameObject ampul in GameObject.FindGameObjectsWithTag("Ampul3"))
             {
                 AmpulAtributs atributs = ampul.GetComponent<AmpulAtributs>();
-                if (atributs.EndRemoved == 2)
+                if (atributs.EndRemoved >= 2)
                 {
                     i++;
                 }
@@ -282,11 +283,36 @@ public class EducationControll : MonoBehaviour
         }
         if ((index == 2 || index == 5 || index == 8))
         {
-            AmpulPrepeared = true;
+            bool EndPushed = false;
+            foreach (GameObject ampul in GameObject.FindGameObjectsWithTag("Ampul1"))
+            {
+                AmpulAtributs atributs = ampul.GetComponent<AmpulAtributs>();
+                if (atributs.EndPinned)
+                {
+                    EndPushed = true;
+                }
+            }
+            if (EndPushed)
+            {
+                AmpulPrepeared = true;
+            }
         }
         if ((index == 3 || index == 6 || index == 9))
         {
-            AmpulPrepeared = true;
+
+            int i = 0;
+            foreach (GameObject ampul in GameObject.FindGameObjectsWithTag("Ampul2"))
+            {
+                AmpulAtributs atributs = ampul.GetComponent<AmpulAtributs>();
+                if (atributs.EndRemoved == 2)
+                {
+                    i++;
+                }
+            }
+            if (i == 1)
+            {
+                AmpulPrepeared = true;
+            }
         }
     }
 
