@@ -95,9 +95,9 @@ public class Heater_V2 : MonoBehaviour
             }
             if (gameObject.tag == "EndAmpulTrigger")
             {
-                GameObject.FindGameObjectWithTag("Controller").GetComponent<EducationControll>().AmpulInserted = true;
-                GameObject.FindGameObjectWithTag("Controller").GetComponent<EducationControll>().Pumper.enabled = true;
-                GameObject.FindGameObjectWithTag("Controller").GetComponent<EducationControll>().Pumper.GetComponent<PumpWork>().Ampul = Fixed.GetComponent<AmpulAtributs>();
+                GameObject.FindGameObjectWithTag("Controller").GetComponent<EducationControll>().AfterAmpulInserted(Fixed);
+                //GameObject.FindGameObjectWithTag("Controller").GetComponent<EducationControll>().Pumper.enabled = true;
+                //GameObject.FindGameObjectWithTag("Controller").GetComponent<EducationControll>().Pumper.GetComponent<PumpWork>().Ampul = Fixed.GetComponent<AmpulAtributs>();
 
             }
         }

@@ -10,9 +10,11 @@ public class PumpRelease : MonoBehaviour
     public GameObject Pump;
     public GameObject ColActivate;
     public GameObject[] Triggers;
+    //[SerializeField] GameObject AdditionTrigger;
     // Start is called before the first frame update
     void Start()
     {
+        //AdditionTrigger.SetActive(false);
         foreach (Collider col in Pump.GetComponents<Collider>())
         {
             col.enabled = false;
@@ -53,6 +55,7 @@ public class PumpRelease : MonoBehaviour
             obj.SetActive(true);
         }
         GameObject.FindGameObjectWithTag("Controller").GetComponent<EducationControll>().PumpOut = true;
+        //AdditionTrigger.SetActive(true);
         Destroy(this);
 
     }

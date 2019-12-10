@@ -3,7 +3,21 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Heater
+  - AmpulTriggerZone
+  - EndAmpulTrigger
+  - Controller
+  - AmpulBox
+  - Ampul1
+  - RightEnd
+  - LeftEnd
+  - Ampul3
+  - Ampul2
+  - right
+  - left
+  - caps
+  - filter
   layers:
   - Default
   - TransparentFX

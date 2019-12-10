@@ -29,11 +29,26 @@ public class EducationControll : MonoBehaviour
     public int DangerLevel;
     public int ReleasedAmpuls;
     public int HeatedInCount; // смотрит, сколько ампул вставили в нагревательную трубку. Сделано для подсчета красныз ампул
-    //bool[] Choise;
+    [SerializeField] SnapOnPos AdditionTrigger;
+    [SerializeField] SnapOnPos CupTrigger;
+    [SerializeField] SnapOnPos FilterTrigger;
+    [SerializeField] EventsOnTriggers Car;
+    [SerializeField] EventsOnTriggers Ground;
+    [SerializeField] EventsOnTriggers CupFillTrigger;
+    public GameObject PrepearedFixedAmpul;
+    public bool FogTest;
+    public bool CarTest;
+    public bool GroudTest;
 
     // Start is called before the first frame update
     void Start()
     {
+        CupFillTrigger.enabled = false;
+        Ground.enabled = false;
+        Car.enabled = false;
+        AdditionTrigger.enabled = false;
+        CupTrigger.enabled = false;
+        FilterTrigger.enabled = false;
         ReleasedAmpuls = 0; 
         END = false;
         Pumper.enabled = false;
@@ -184,6 +199,7 @@ public class EducationControll : MonoBehaviour
         TMPRight.text = "Температура: " + s + "\n" + "Необходимая температура: " + l;
         time = -1000000;
     }
+
 
     void StartText()
     {
@@ -539,6 +555,92 @@ public class EducationControll : MonoBehaviour
             countTimes = 12;
         }
         TMPMiddle.text = s;
+    }
+
+    public void ActivatePumpWork(bool t = true)
+    {
+        AmpulInserted = t;
+        Pumper.enabled = t;
+        if (t)
+        {
+            Pumper.GetComponent<PumpWork>().Ampul = PrepearedFixedAmpul.GetComponent<AmpulAtributs>();
+        }
+    }
+
+    public void PlaceAdditionOnPump()
+    {
+        AdditionTrigger.enabled = true;
+        TMPMiddle.text = "Накрутите насадку на место";
+        CupTrigger.enabled = false;
+        FilterTrigger.enabled = false;
+    }
+
+    public void AfterAmpulInserted(GameObject Fixed)
+    {
+        if (!GroudTest && !CarTest && !FogTest)
+        {
+            PrepearedFixedAmpul = Fixed;
+            ActivatePumpWork();
+        }
+        else
+        {
+            PlaceAdditionOnPump();
+        }
+    }
+
+    public void AfterAdditionPlaced()
+    {
+        if (FogTest)
+        {
+            PlaceFiler();
+            FilterTrigger.gameObject.transform.localPosition -= new Vector3(0, 0.00224f, 0);
+        }
+        if (GroudTest || CarTest)
+        {
+            PlaceCup();
+        }
+    }
+
+    public void PlaceCup()
+    {
+        TMPMiddle.text = "Закрепите воронку на место";
+        CupTrigger.enabled = true;
+    }
+
+    public void PlaceFiler()
+    {
+        if (GroudTest)
+        {
+
+        }
+        FilterTrigger.enabled = true;
+        TMPMiddle.text = "Закрепите фильтр на место";
+    }
+
+    public void CupPlaced()
+    {
+        if (GroudTest)
+        {
+            Ground.enabled = true;
+            TMPMiddle.text = "Лопаткой снимите пробу верхнего слоя почвы";
+        }
+        if (CarTest)
+        {
+            TakePumpToCar();
+        }
+    }
+
+    public void FillCup()
+    {
+        TMPMiddle.text = "Насыпьте пробу в воронку";
+        CupFillTrigger.enabled = true;
+    }
+
+    public void TakePumpToCar()
+    {
+        Car.enabled = true;
+        ActivatePumpWork(false);
+        TMPMiddle.text = "Приложите насадку к машине";
     }
 
     // Update is called once per frame
