@@ -19,6 +19,6 @@
 
 
 ## Видео:
-
+[Видео геймплея](https://www.youtube.com/watch?v=ZAXZgctEE5I) 
 
 
